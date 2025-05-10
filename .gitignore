@@ -1,0 +1,16 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+
+# Environnement virtuel
+.venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+media/
+staticfiles/
+
+# Secrets
+.env
