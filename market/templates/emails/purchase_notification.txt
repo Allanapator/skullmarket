@@ -1,0 +1,21 @@
+Bonjour {{ offer.seller.ubisoft_username }},
+
+L'utilisateur {{ buyer.ubisoft_username }} souhaite acheter votre objet :
+
+- {{ offer.item_offered.name }} x{{ offer.quantity }}
+- Pour : {% if offer.price_type == 'money' %}{{ offer.price_money }} pièces{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}
+
+Message de l'acheteur :
+{{ message|default:"(aucun message)" }}
+
+Coordonnées de l'acheteur :
+- Email : {{ buyer.email }}
+- Ubisoft : {{ buyer.ubisoft_username }}
+{% if buyer.discord_username %}- Discord : {{ buyer.discord_username }}{% endif %}
+{% if buyer.psn_username %}- PSN : {{ buyer.psn_username }}{% endif %}
+{% if buyer.xbox_username %}- Xbox : {{ buyer.xbox_username }}{% endif %}
+{% if buyer.steam_username %}- Steam : {{ buyer.steam_username }}{% endif %}
+
+Veuillez le contacter en jeu ou via les moyens ci-dessus pour finaliser l'échange.
+
+⚓ Skull Market

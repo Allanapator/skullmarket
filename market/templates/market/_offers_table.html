@@ -1,0 +1,44 @@
+<table class="table align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Image</th><th>Nom</th><th>Quantité</th><th>Prix</th><th>Vendeur</th><th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for offer in offers %}
+        <tr class="{% if forloop.counter|divisibleby:2 == False %}bg-gray{% endif %}">
+            <td>
+                {% if offer.item_offered.image %}
+                    <img src="{{ offer.item_offered.image.url }}" width="40" alt="">
+                {% else %}
+                    <span class="text-muted">Pas d'image</span>
+                {% endif %}
+            </td>
+            <td>{{ offer.item_offered.name }}</td>
+            <td>{{ offer.quantity }}</td>
+            <td>
+                {% if offer.price_type == 'money' %}
+                {{ offer.price_money }} pièces
+                {% else %}
+                {{ offer.price_item_quantity }}x {{ offer.price_item.name }}
+                {% endif %}
+            </td>
+            <td>{{ offer.seller.ubisoft_username }}</td>
+            <td>
+                {% if show_buy_button and offer.seller != request.user %}
+                    <button
+                    class="btn btn-sm btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#purchaseModal"
+                    data-offer-id="{{ offer.id }}"
+                    data-offer-summary="{{ offer.item_offered.name }} x{{ offer.quantity }} pour {% if offer.price_type == 'money' %}{{ offer.price_money }} pièces{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}">
+                    Acheter
+                </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center text-muted">Aucune offre à afficher.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

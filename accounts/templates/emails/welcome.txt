@@ -1,0 +1,8 @@
+Bonjour {{ user.ubisoft_username|default:user.username }},
+
+Bienvenue sur ⚓ Skull Market, la place d’échange communautaire entre pirates de Skull & Bones !
+
+Vous pouvez dès maintenant créer des ventes ou rechercher des objets.
+
+Bon pillage,
+L’équipe Skull Market
