@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 class SignupForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, required=False, label="Nouveau mot de passe")
+    password = forms.CharField(widget=forms.PasswordInput, required=False, label="Mot de passe")
     password_confirm = forms.CharField(widget=forms.PasswordInput, required=False, label="Confirmer le mot de passe")
 
     class Meta:

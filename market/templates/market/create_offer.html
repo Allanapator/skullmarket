@@ -4,15 +4,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Créer une offre de vente</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Select2 -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
   <style>
+    body {
+      background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    
+    .card-dark {
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    
     .select2-results__option img,
     .select2-selection__rendered img {
       width: 30px;
@@ -20,95 +29,122 @@
       margin-right: 10px;
       vertical-align: middle;
     }
+    
+    .select2-container--default .select2-results__option {
+      color: #000;
+      background-color: #fff;
+    }
+    
+    .select2-container--default .select2-selection--single {
+      background-color: #fff;
+      color: #000;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      color: #000;
+    }
+    
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+      background-color: #e9ecef;
+      color: #000;
+    }
+    
+    .required-star::after {
+      content: " *";
+      color: red;
+    }
   </style>
 </head>
-<body class="bg-light">
-<div class="container my-5">
-  <div class="card shadow-sm p-4 mx-auto" style="max-width: 600px;">
-    <h2 class="text-center mb-4">Créer une offre de vente</h2>
-
-    <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-
+<body class="min-vh-100">
+  
+  <header class="text-center pt-4">
+    <h1 class="display-5 fw-bold">⚓ Skull Market</h1>
+  </header>
+  <div class="container py-5 px-3">
+    <div class="card card-dark shadow-sm p-4 mx-auto text-white" style="max-width: 600px;">
+      
       <div class="mb-3">
-        <label for="id_item_offered" class="form-label">Objet à vendre</label>
-        <select name="item_offered" id="id_item_offered" class="form-select select2-items" data-placeholder="Choisir un objet">
-          {% for item in form.fields.item_offered.queryset %}
-            <option value="{{ item.pk }}"
-              {% if item.image %}
-              data-image="{{ item.image.url }}"
-              {% endif %}
-            >{{ item.name }}</option>
-          {% endfor %}
-        </select>
+        <button onclick="history.back()" class="btn btn-outline-light btn-sm">
+          ← Retour
+        </button>
       </div>
-
-      <div class="mb-3">
-        <label for="id_quantity" class="form-label">Quantité</label>
-        {{ form.quantity|add_class:"form-control" }}
-      </div>
-
-      <div class="mb-3">
-        <label for="id_price_type" class="form-label">Type de paiement</label>
-        {{ form.price_type|add_class:"form-select" }}
-      </div>
-
-      <div id="money_fields" class="mb-3">
-        <label for="id_price_money" class="form-label">Prix en argent</label>
-        {{ form.price_money|add_class:"form-control" }}
-      </div>
-
-      <div id="item_fields" class="mb-3">
-        <label for="id_price_item" class="form-label">Objet demandé</label>
-        <select name="price_item" id="id_price_item" class="form-select select2-items" data-placeholder="Objet demandé">
-          {% for item in form.fields.price_item.queryset %}
-            <option value="{{ item.pk }}"
-              {% if item.image %}
-              data-image="{{ item.image.url }}"
-              {% endif %}
-            >{{ item.name }}</option>
-          {% endfor %}
-        </select>
-
-        <label for="id_price_item_quantity" class="form-label mt-2">Quantité demandée</label>
-        {{ form.price_item_quantity|add_class:"form-control" }}
-      </div>
-
-      <div class="d-grid mt-4">
-        <button type="submit" class="btn btn-success">Publier l'offre</button>
-      </div>
-    </form>
+      
+      <h2 class="text-center mb-4">Créer une offre de vente</h2>
+      
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="mb-3">
+          <label for="id_item_offered" class="form-label required-star">Objet à vendre</label>
+          <select name="item_offered" id="id_item_offered" class="form-select select2-items text-dark" data-placeholder="Choisir un objet">
+            {% for item in form.fields.item_offered.queryset %}
+            <option class="text-dark" value="{{ item.pk }}" {% if item.image %}data-image="{{ item.image.url }}"{% endif %}>{{ item.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="mb-3">
+          <label for="id_quantity" class="form-label required-star">Quantité</label>
+          {{ form.quantity|add_class:"form-control" }}
+        </div>
+        
+        <div class="mb-3">
+          <label for="id_price_type" class="form-label required-star">Type de paiement</label>
+          {{ form.price_type|add_class:"form-select" }}
+        </div>
+        
+        <div id="money_fields" class="mb-3">
+          <label for="id_price_money" class="form-label">Prix en argent</label>
+          {{ form.price_money|add_class:"form-control" }}
+        </div>
+        
+        <div id="item_fields" class="mb-3">
+          <label for="id_price_item" class="form-label">Objet demandé</label>
+          <select name="price_item" id="id_price_item" class="form-select select2-items" data-placeholder="Objet demandé">
+            {% for item in form.fields.price_item.queryset %}
+            <option value="{{ item.pk }}" {% if item.image %}data-image="{{ item.image.url }}"{% endif %}>{{ item.name }}</option>
+            {% endfor %}
+          </select>
+          
+          <label for="id_price_item_quantity" class="form-label mt-2">Quantité demandée</label>
+          {{ form.price_item_quantity|add_class:"form-control" }}
+        </div>
+        
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-success">Publier l'offre</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-
-<script>
-  function toggleFields() {
-    const type = document.getElementById("id_price_type").value;
-    document.getElementById("money_fields").style.display = (type === "money") ? "block" : "none";
-    document.getElementById("item_fields").style.display = (type === "item") ? "block" : "none";
-  }
-
-  function formatItem(item) {
-    if (!item.id) return item.text;
-    const imageUrl = $(item.element).data('image');
-    if (imageUrl) {
-      return $(`<span><img src="${imageUrl}" /> ${item.text}</span>`);
+  
+  <script>
+    function toggleFields() {
+      const type = document.getElementById("id_price_type").value;
+      document.getElementById("money_fields").style.display = (type === "money") ? "block" : "none";
+      document.getElementById("item_fields").style.display = (type === "item") ? "block" : "none";
     }
-    return $(`<span>${item.text}</span>`);
-  }
-
-  $(document).ready(function () {
-    $('.select2-items').select2({
-      templateResult: formatItem,
-      templateSelection: formatItem,
-      width: '100%'
+    
+    function formatItem(item) {
+      if (!item.id) return item.text;
+      const imageUrl = $(item.element).data('image');
+      if (imageUrl) {
+        return $(`<span><img src="${imageUrl}" /> ${item.text}</span>`);
+      }
+      return $(`<span>${item.text}</span>`);
+    }
+    
+    $(document).ready(function () {
+      $('.select2-items').select2({
+        templateResult: formatItem,
+        templateSelection: formatItem,
+        width: '100%'
+      });
+      
+      toggleFields();
+      $('#id_price_type').on('change', toggleFields);
     });
-
-    toggleFields();
-    $('#id_price_type').on('change', toggleFields);
-  });
-</script>
-
+  </script>
+  
 </body>
 </html>
