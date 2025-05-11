@@ -1,44 +1,94 @@
 <table class="table align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th>Image</th><th>Nom</th><th>Quantité</th><th>Prix</th><th>Vendeur</th><th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for offer in offers %}
-        <tr class="{% if forloop.counter|divisibleby:2 == False %}bg-gray{% endif %}">
-            <td>
-                {% if offer.item_offered.image %}
-                    <img src="{{ offer.item_offered.image.url }}" width="40" alt="">
-                {% else %}
-                    <span class="text-muted">Pas d'image</span>
-                {% endif %}
-            </td>
-            <td>{{ offer.item_offered.name }}</td>
-            <td>{{ offer.quantity }}</td>
-            <td>
-                {% if offer.price_type == 'money' %}
-                {{ offer.price_money }} pièces
-                {% else %}
-                {{ offer.price_item_quantity }}x {{ offer.price_item.name }}
-                {% endif %}
-            </td>
-            <td>{{ offer.seller.ubisoft_username }}</td>
-            <td>
-                {% if show_buy_button and offer.seller != request.user %}
-                    <button
-                    class="btn btn-sm btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#purchaseModal"
-                    data-offer-id="{{ offer.id }}"
-                    data-offer-summary="{{ offer.item_offered.name }} x{{ offer.quantity }} pour {% if offer.price_type == 'money' %}{{ offer.price_money }} pièces{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}">
-                    Acheter
-                </button>
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="6" class="text-center text-muted">Aucune offre à afficher.</td></tr>
-        {% endfor %}
-    </tbody>
+  <thead class="table-dark">
+    <tr>
+      <th>Image</th>
+      <th>Nom</th>
+      <th>Quantité</th>
+      <th>Prix</th>
+      <th>
+        {% if request.path == '/app/mes-achats/' %}
+          Vendeur
+        {% elif request.path == '/app/mes-ventes/' %}
+          Acheteur
+        {% else %}
+          Vendeur
+        {% endif %}
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for offer in offers %}
+      <tr class="{% if forloop.counter|divisibleby:2 == False %}bg-gray{% endif %}">
+        <td>
+          {% if offer.item_offered.image %}
+            <img src="{{ offer.item_offered.image.url }}" width="40" alt="">
+          {% else %}
+            <span class="text-muted">Pas d'image</span>
+          {% endif %}
+        </td>
+        <td>{{ offer.item_offered.name }}</td>
+        <td>{{ offer.quantity }}</td>
+        <td>
+          {% if offer.price_type == 'money' %}
+            {{ offer.price_money }} pièces
+          {% else %}
+            {{ offer.price_item_quantity }}x {{ offer.price_item.name }}
+          {% endif %}
+        </td>
+        <td>
+          {% if request.path == '/app/mes-achats/' %}
+            <a href="#" class="text-decoration-underline show-user" data-user-id="{{ offer.seller.id }}">
+                {{ offer.seller.ubisoft_username|default:offer.seller.username }}
+            </a>
+          {% elif request.path == '/app/mes-ventes/' and offer.status == 'closed' %}
+            {% with offer.interests.all|first as intent %}
+              {% if intent %}
+                <a href="#" class="text-decoration-underline show-user" data-user-id="{{ intent.buyer.id }}">
+                    {{ intent.buyer.ubisoft_username|default:intent.buyer.username }}
+                </a>
+              {% else %}
+                -
+              {% endif %}
+            {% endwith %}
+          {% else %}
+            {{ offer.seller.ubisoft_username|default:offer.seller.username }}
+          {% endif %}
+        </td>
+        <td>
+          {% if show_buy_button and offer.seller != request.user %}
+            <button
+              class="btn btn-sm btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#purchaseModal"
+              data-offer-id="{{ offer.id }}"
+              data-offer-summary="{{ offer.item_offered.name }} x{{ offer.quantity }} pour {% if offer.price_type == 'money' %}{{ offer.price_money }} pièces{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}">
+              Acheter
+            </button>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="6" class="text-center text-muted">Aucune offre à afficher.</td></tr>
+    {% endfor %}
+  </tbody>
 </table>
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title" id="userModalLabel">Informations du joueur</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Email :</strong> <span id="user-email"></span></p>
+        <p><strong>Ubisoft :</strong> <span id="user-ubisoft"></span></p>
+        <p><strong>Discord :</strong> <span id="user-discord"></span></p>
+        <p><strong>PSN :</strong> <span id="user-psn"></span></p>
+        <p><strong>Xbox :</strong> <span id="user-xbox"></span></p>
+        <p><strong>Steam :</strong> <span id="user-steam"></span></p>
+      </div>
+    </div>
+  </div>
+</div>

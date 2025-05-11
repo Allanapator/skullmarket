@@ -171,6 +171,25 @@
       };
     }
   </script>
-  
+  <script>
+    document.querySelectorAll('.show-user').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const userId = this.dataset.userId;
+
+        fetch(`/app/ajax/user/${userId}/`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('user-email').textContent = data.email || '-';
+            document.getElementById('user-ubisoft').textContent = data.ubisoft || '-';
+            document.getElementById('user-discord').textContent = data.discord || '-';
+            document.getElementById('user-psn').textContent = data.psn || '-';
+            document.getElementById('user-xbox').textContent = data.xbox || '-';
+            document.getElementById('user-steam').textContent = data.steam || '-';
+            new bootstrap.Modal(document.getElementById('userModal')).show();
+          });
+      });
+    });
+  </script>
 </body>
 </html>

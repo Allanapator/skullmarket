@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import offer_list, create_offer, my_offers, my_purchases, purchase_offer, ajax_filtered_offers, ajax_items
+from .views import offer_list, create_offer, my_offers, my_purchases, purchase_offer, ajax_filtered_offers, ajax_items, ajax_user_detail
 
 
 urlpatterns = [
@@ -10,4 +10,6 @@ urlpatterns = [
     path('acheter/', purchase_offer, name='purchase_offer'),
     path('ajax-filter/', ajax_filtered_offers, name='ajax_filtered_offers'),
     path('ajax-items/', ajax_items, name='ajax_items'),
+    path('ajax/user/<int:user_id>/', ajax_user_detail, name='ajax_user_detail'),
+
 ]

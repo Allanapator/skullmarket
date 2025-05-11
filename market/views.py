@@ -9,7 +9,13 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
+from django.shortcuts import get_object_or_404
+from django.db.models import Prefetch
+from accounts.models import User
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 @login_required
 def offer_list(request):
@@ -46,7 +52,9 @@ def create_offer(request):
 
 @login_required
 def my_offers(request):
-    offers = TradeOffer.objects.filter(seller=request.user).select_related('item_offered', 'seller')
+    offers = TradeOffer.objects.filter(seller=request.user).select_related('item_offered', 'seller').prefetch_related(
+        Prefetch('interests', queryset=PurchaseIntent.objects.select_related('buyer'))
+    )
     categories = ItemCategory.objects.all()
     return render(request, 'market/offer_list.html', {
         'offers': offers,
@@ -57,7 +65,6 @@ def my_offers(request):
 
 @login_required
 def my_purchases(request):
-    # On récupère toutes les offres où l'utilisateur a fait un achat
     offer_ids = PurchaseIntent.objects.filter(buyer=request.user).values_list('offer_id', flat=True)
     offers = TradeOffer.objects.filter(id__in=offer_ids).select_related('item_offered', 'seller')
     categories = ItemCategory.objects.all()
@@ -108,13 +115,13 @@ def purchase_offer(request):
 
         email_body = render_to_string('emails/purchase_notification.txt', context)
 
-        send_mail(
-            subject,
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [seller_email],
-            fail_silently=False
-        )
+        # send_mail(
+        #     subject,
+        #     email_body,
+        #     settings.DEFAULT_FROM_EMAIL,
+        #     [seller_email],
+        #     fail_silently=False
+        # )
 
         messages.success(request, "Votre intention d'achat a été envoyée au vendeur par email.")
         return redirect('offer_list')
@@ -161,3 +168,21 @@ def ajax_items(request):
         for item in queryset[:50]
     ]
     return JsonResponse(results, safe=False)
+
+@login_required
+def user_detail(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    return render(request, 'market/user_detail.html', {'user_detail': user})
+
+@login_required
+def ajax_user_detail(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    data = {
+        "email": user.email,
+        "ubisoft": user.ubisoft_username,
+        "discord": user.discord_username,
+        "psn": user.psn_username,
+        "xbox": user.xbox_username,
+        "steam": user.steam_username,
+    }
+    return JsonResponse(data)
