@@ -37,15 +37,14 @@ class SignupForm(forms.ModelForm):
         pwd = self.cleaned_data.get('password')
         if pwd:
             user.set_password(pwd)
-        if commit:
-            user.save()
+        user.save()
         return user
 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=True)
             subject = "Bienvenue sur Skull Market ⚓"
             message = render_to_string('emails/welcome.txt', {
                 'user': user,
