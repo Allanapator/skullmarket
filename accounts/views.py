@@ -49,13 +49,13 @@ def signup(request):
             message = render_to_string('emails/welcome.txt', {
                 'user': user,
             })
-            # send_mail(
-            #     subject,
-            #     message,
-            #     settings.DEFAULT_FROM_EMAIL,
-            #     [user.email],
-            #     fail_silently=False,
-            # )
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
             login(request, user)
             return redirect('offer_list')
     else:

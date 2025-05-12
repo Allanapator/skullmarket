@@ -115,13 +115,13 @@ def purchase_offer(request):
 
         email_body = render_to_string('emails/purchase_notification.txt', context)
 
-        # send_mail(
-        #     subject,
-        #     email_body,
-        #     settings.DEFAULT_FROM_EMAIL,
-        #     [seller_email],
-        #     fail_silently=False
-        # )
+        send_mail(
+            subject,
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [seller_email],
+            fail_silently=False
+        )
 
         messages.success(request, "Votre intention d'achat a été envoyée au vendeur par email.")
         return redirect('offer_list')
