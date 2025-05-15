@@ -1,13 +1,33 @@
+{% load i18n %}
 {% block content %}
 <div class="container py-5 text-white">
-  <h2>Informations du joueur</h2>
+  <h2>{% trans "Informations du joueur" %}</h2>
   <ul class="list-group">
-    <li class="list-group-item">Email : {{ user_detail.email }}</li>
-    <li class="list-group-item">Ubisoft : {{ user_detail.ubisoft_username }}</li>
-    <li class="list-group-item">Discord : {{ user_detail.discord_username }}</li>
-    <li class="list-group-item">PSN : {{ user_detail.psn_username }}</li>
-    <li class="list-group-item">Xbox : {{ user_detail.xbox_username }}</li>
-    <li class="list-group-item">Steam : {{ user_detail.steam_username }}</li>
+    {% if user_detail.ubisoft_username %}
+      <li class="list-group-item">
+        <strong>{% trans "Ubisoft" %} :</strong> {{ user_detail.ubisoft_username }}
+      </li>
+    {% endif %}
+    {% if user_detail.discord_username %}
+      <li class="list-group-item">
+        <strong>{% trans "Discord" %} :</strong> {{ user_detail.discord_username }}
+      </li>
+    {% endif %}
+    {% if user_detail.psn_username %}
+      <li class="list-group-item">
+        <strong>{% trans "PSN" %} :</strong> {{ user_detail.psn_username }}
+      </li>
+    {% endif %}
+    {% if user_detail.xbox_username %}
+      <li class="list-group-item">
+        <strong>{% trans "Xbox" %} :</strong> {{ user_detail.xbox_username }}
+      </li>
+    {% endif %}
+    {% if user_detail.steam_username %}
+      <li class="list-group-item">
+        <strong>{% trans "Steam" %} :</strong> {{ user_detail.steam_username }}
+      </li>
+    {% endif %}
   </ul>
 </div>
 {% endblock %}

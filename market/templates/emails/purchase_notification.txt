@@ -1,21 +1,22 @@
-Bonjour {{ offer.seller.ubisoft_username }},
+{% load i18n %}
+{% blocktrans with seller=offer.seller.ubisoft_username buyer=buyer.ubisoft_username %}
+Bonjour {{ seller }},
 
-L'utilisateur {{ buyer.ubisoft_username }} souhaite acheter votre objet :
+L'utilisateur {{ buyer }} souhaite acheter votre objet :
+{% endblocktrans %}
 
 - {{ offer.item_offered.name }} x{{ offer.quantity }}
-- Pour : {% if offer.price_type == 'money' %}{{ offer.price_money }} pièces{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}
+- {% trans "Pour" %} : {% if offer.price_type == 'money' %}{{ offer.price_money }} {% trans "pièces" %}{% else %}{{ offer.price_item_quantity }}x {{ offer.price_item.name }}{% endif %}
 
-Message de l'acheteur :
+{% trans "Message de l'acheteur" %} :
 {{ message|default:"(aucun message)" }}
 
-Coordonnées de l'acheteur :
-- Email : {{ buyer.email }}
+{% trans "Coordonnées de l'acheteur" %} :
+- {% trans "Email" %} : {{ buyer.email }}
 - Ubisoft : {{ buyer.ubisoft_username }}
 {% if buyer.discord_username %}- Discord : {{ buyer.discord_username }}{% endif %}
 {% if buyer.psn_username %}- PSN : {{ buyer.psn_username }}{% endif %}
 {% if buyer.xbox_username %}- Xbox : {{ buyer.xbox_username }}{% endif %}
 {% if buyer.steam_username %}- Steam : {{ buyer.steam_username }}{% endif %}
 
-Veuillez le contacter en jeu ou via les moyens ci-dessus pour finaliser l'échange.
-
-⚓ Skull Market
+{% trans "Veuillez le contacter en jeu ou via les moyens ci-dessus pour finaliser l'échange." %}

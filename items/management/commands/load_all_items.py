@@ -1,4 +1,4 @@
-# items/management/commands/load_all_items.py
+# Modifications pour load_all_items.py avec gestion des traductions en/fr
 
 import json
 import re
@@ -14,12 +14,11 @@ ROMAN_SUFFIXES = {
 }
 
 class Command(BaseCommand):
-    help = "Importe et enrichit tous les items depuis les JSON, en mettant à jour noms, descriptions, catégories, suffixes et préfixes."
+    help = "Importe et enrichit tous les items avec traductions en/fr."
 
     def handle(self, *args, **options):
         base_dir = Path(__file__).resolve().parent.parent.parent / 'data' / 'skullandbones'
 
-        # --- 1. Import de base ---
         sources = [
             ('items.json', 'type'),
             ('materials.json', 'category'),
@@ -40,21 +39,21 @@ class Command(BaseCommand):
                 description = f"{file_name.replace('.json', '')} : {slug}"
                 category_slug = item_data.get(cat_key, "autre").lower()
                 category_name = category_slug.replace("_", " ").capitalize()
-                category, _ = ItemCategory.objects.get_or_create(name=category_name, slug=category_slug)
+                category, _ = ItemCategory.objects.get_or_create(slug=category_slug, defaults={"name_fr": category_name})
 
                 Item.objects.update_or_create(
                     slug=slug.lower(),
                     defaults={
-                        "name": name,
-                        "description": description,
+                        "name_fr": name,
+                        "description_fr": description,
                         "category": category,
                         "tradable": True,
                     }
                 )
 
-        self.stdout.write("[✓] Import initial terminé.")
+        self.stdout.write("[✓] Import FR terminé.")
 
-        # --- 2. Enrichissement ---
+        # Import EN
         translation_sources = {
             "en_items.json": "items",
             "en_materials.json": "materials",
@@ -71,35 +70,22 @@ class Command(BaseCommand):
             data = translations.get(item.slug)
             if not data: continue
 
-            item.name = data.get("name", item.name)
+            item.name_en = data.get("name", item.name_fr)
             desc = data.get("description", "")
             if isinstance(desc, dict):
                 desc = desc.get("general") or next(iter(desc.values()), "")
-            item.description = desc or item.description
+            item.description_en = desc or item.description_fr
             item.save()
 
-        self.stdout.write("[✓] Traductions appliquées.")
+        self.stdout.write("[✓] Traductions EN appliquées.")
 
-        # --- 3. Majuscules sur préfixes ---
-        en_prefixes_path = base_dir / 'en_items.json'
-        if en_prefixes_path.exists():
-            en_prefixes = json.load(open(en_prefixes_path, encoding='utf-8')).get("items", {})
-            for item in Item.objects.all():
-                for prefix_key, prefix_data in en_prefixes.items():
-                    if item.slug.lower().startswith(prefix_key.lower()):
-                        suffix = item.slug[len(prefix_key):]
-                        capitalized = prefix_data.get("name", prefix_key)
-                        item.name = f"{capitalized}{suffix}"
-                        item.save()
-                        break
-            self.stdout.write("[✓] Préfixes capitalisés.")
-
-        # --- 4. Chiffres romains ---
+        # Suffixes romains sur name_fr et name_en
         for item in Item.objects.all():
             for digit, roman in ROMAN_SUFFIXES.items():
-                if item.name.endswith(digit):
-                    item.name = item.name[:-len(digit)].rstrip() + roman
-                    item.save()
-                    break
+                if item.name_fr.endswith(digit):
+                    item.name_fr = item.name_fr[:-len(digit)].rstrip() + roman
+                if item.name_en and item.name_en.endswith(digit):
+                    item.name_en = item.name_en[:-len(digit)].rstrip() + roman
+            item.save()
 
-        self.stdout.write(self.style.SUCCESS("[✓] Tous les items ont été importés et enrichis."))
+        self.stdout.write(self.style.SUCCESS("[✓] Tous les items ont été enrichis."))

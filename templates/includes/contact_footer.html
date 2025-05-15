@@ -1,0 +1,8 @@
+{% load static i18n %}
+
+<footer class="mt-5 text-center text-muted py-4">
+  <p>&copy; {{ current_year }} Skull Market</p>
+  <a href="{% url 'contact' %}" class="text-decoration-underline text-light">
+    {% trans "Contactez-nous" %}
+  </a>
+</footer>

@@ -13,6 +13,8 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Prefetch
 from accounts.models import User
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 
 
 User = get_user_model()
@@ -83,13 +85,13 @@ def purchase_offer(request):
         consent = request.POST.get('consent')
 
         if not consent:
-            messages.error(request, "Vous devez accepter le partage de vos coordonnées.")
+            messages.error(request, _("Vous devez accepter le partage de vos coordonnées."))
             return redirect('offer_list')
 
         try:
             offer = TradeOffer.objects.get(id=offer_id)
         except TradeOffer.DoesNotExist:
-            messages.error(request, "Cette offre n'existe pas.")
+            messages.error(request, _("Cette offre n'existe pas."))
             return redirect('offer_list')
 
         # Création de l'intention d'achat
@@ -104,7 +106,7 @@ def purchase_offer(request):
         offer.save()
 
         # Envoi d'un email au vendeur
-        subject = f"[Skull Market] {request.user.ubisoft_username} souhaite acheter votre objet"
+        subject = _("[Skull Market] {request.user.ubisoft_username} souhaite acheter votre objet")
         seller_email = offer.seller.email
 
         context = {
@@ -123,7 +125,7 @@ def purchase_offer(request):
             fail_silently=False
         )
 
-        messages.success(request, "Votre intention d'achat a été envoyée au vendeur par email.")
+        messages.success(request, _("Votre intention d'achat a été envoyée au vendeur par email."))
         return redirect('offer_list')
 
     return redirect('offer_list')

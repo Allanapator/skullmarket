@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +25,7 @@
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-
+  {% include "includes/language_selector.html" %}
   <header class="text-center pt-4">
     <h1 class="display-5 fw-bold">⚓ Skull Market</h1>
   </header>
@@ -32,13 +33,14 @@
   <main class="flex-fill d-flex align-items-start justify-content-center mt-5 px-3">
     <div class="welcome-box text-center" style="max-width: 600px;">
       <p class="lead mb-4">
-        Bienvenue sur <strong>Skull Market</strong>, la place de marché communautaire des joueurs de <strong>Skull & Bones</strong>.<br>
-        Achetez, vendez et échangez objets et monnaie entre capitaines.
+        {% trans "Bienvenue sur" %} <strong>Skull Market</strong>, 
+        {% trans "la place de marché communautaire des joueurs de" %} <strong>Skull & Bones</strong>.<br>
+        {% trans "Achetez, vendez et échangez objets et monnaie entre capitaines." %}
       </p>
 
       <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-        <a href="/accounts/login/" class="btn btn-outline-light btn-lg">Connexion</a>
-        <a href="/accounts/signup/" class="btn btn-success btn-lg">Je m’inscris</a>
+        <a href="/accounts/login/" class="btn btn-outline-light btn-lg">{% trans "Connexion" %}</a>
+        <a href="/accounts/signup/" class="btn btn-success btn-lg">{% trans "Je m’inscris"%}</a>
       </div>
     </div>
   </main>

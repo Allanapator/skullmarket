@@ -1,8 +1,11 @@
-Bonjour {{ user.ubisoft_username|default:user.username }},
+{% load i18n %}
+{% blocktrans with username=user.ubisoft_username|default:user.username %}
+Bonjour {{ username }},
 
 Bienvenue sur ⚓ Skull Market, la place d’échange communautaire entre pirates de Skull & Bones !
 
 Vous pouvez dès maintenant créer des ventes ou rechercher des objets.
 
-Bon pillage,
+Bon pillage,  
 L’équipe Skull Market
+{% endblocktrans %}

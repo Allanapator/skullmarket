@@ -1,0 +1,443 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-15 22:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/accounts/edit_account.html:7
+#: accounts/templates/accounts/edit_account.html:45
+msgid "Modifier mes informations"
+msgstr "Modify my information"
+
+#: accounts/templates/accounts/edit_account.html:41
+#: accounts/templates/registration/login.html:45
+#: accounts/templates/registration/signup.html:49
+#: market/templates/market/create_offer.html:61
+msgid "Retour"
+msgstr "Back"
+
+#: accounts/templates/accounts/edit_account.html:65
+#: accounts/templates/registration/signup.html:72
+msgid "Enregistrer"
+msgstr "Register"
+
+#: accounts/templates/emails/welcome.txt:2
+#, python-format
+msgid ""
+"\n"
+"Bonjour %(username)s,\n"
+"\n"
+"Bienvenue sur ⚓ Skull Market, la place d’échange communautaire entre "
+"pirates de Skull & Bones !\n"
+"\n"
+"Vous pouvez dès maintenant créer des ventes ou rechercher des objets.\n"
+"\n"
+"Bon pillage,  \n"
+"L’équipe Skull Market\n"
+msgstr ""
+"\n"
+"Hello %(username)s,\n"
+"\n"
+"Welcome to ⚓ Skull Market, the community trading hub for Skull & Bones "
+"pirates!\n"
+"\n"
+"You can now create listings or search for items.\n"
+"\n"
+"Happy looting,  \n"
+"The Skull Market team\n"
+
+#: accounts/templates/registration/login.html:7
+#: accounts/templates/registration/login.html:48
+#: home/templates/home/homepage.html:42
+msgid "Connexion"
+msgstr "Login"
+
+#: accounts/templates/registration/login.html:63
+msgid "Se connecter"
+msgstr "Sign in"
+
+#: accounts/templates/registration/login.html:68
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password ?"
+
+#: accounts/templates/registration/login.html:75
+msgid "Pas encore de compte ?"
+msgstr "No account yet ?"
+
+#: accounts/templates/registration/login.html:75
+msgid "Inscrivez-vous"
+msgstr "Sign up"
+
+#: accounts/templates/registration/signup.html:7
+#: accounts/templates/registration/signup.html:52
+msgid "Créer un compte"
+msgstr "Create an account"
+
+#: accounts/templates/registration/signup.html:81
+msgid "Déjà inscrit ?"
+msgstr "Already registered ?"
+
+#: accounts/templates/registration/signup.html:81
+msgid "Connectez-vous"
+msgstr "Log in"
+
+#: accounts/views.py:17
+msgid "Mot de passe"
+msgstr "Password"
+
+#: accounts/views.py:22
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+#: accounts/views.py:33
+msgid "Nom d'utilisateur"
+msgstr "User name"
+
+#: accounts/views.py:34
+msgid "Adresse email"
+msgstr "Email address"
+
+#: accounts/views.py:35
+#, fuzzy
+#| msgid "Ubisoft"
+msgid "Pseudo Ubisoft"
+msgstr "Pseudo Ubisoft"
+
+#: accounts/views.py:36
+#, fuzzy
+#| msgid "Discord"
+msgid "Pseudo Discord"
+msgstr "Pseudo Discord"
+
+#: accounts/views.py:37
+msgid "Pseudo PSN"
+msgstr "Pseudo PSN"
+
+#: accounts/views.py:38
+msgid "Pseudo Xbox"
+msgstr "Pseudo Xbox"
+
+#: accounts/views.py:39
+msgid "Pseudo Steam"
+msgstr "Pseudo Steam"
+
+#: accounts/views.py:48
+msgid "Les mots de passe ne correspondent pas."
+msgstr "Passwords don't match."
+
+#: accounts/views.py:50
+msgid "Le mot de passe doit contenir au moins 8 caractères."
+msgstr "The password must contain at least 8 characters."
+
+#: accounts/views.py:59
+#, fuzzy
+#| msgid "Bienvenue sur"
+msgid "Bienvenue sur Skull Market ⚓"
+msgstr "Welcome to"
+
+#: accounts/views.py:84
+msgid "Vos informations ont bien été mises à jour."
+msgstr "Your information has been updated."
+
+#: home/templates/home/homepage.html:36
+msgid "Bienvenue sur"
+msgstr "Welcome to"
+
+#: home/templates/home/homepage.html:37
+msgid "la place de marché communautaire des joueurs de"
+msgstr "the community marketplace for Skull & Bones players"
+
+#: home/templates/home/homepage.html:38
+msgid "Achetez, vendez et échangez objets et monnaie entre capitaines."
+msgstr "Buy, sell and trade items and currency between captains."
+
+#: home/templates/home/homepage.html:43
+msgid "Je m’inscris"
+msgstr "Sign up"
+
+#: home/views.py:22
+msgid "Nouveau message via le formulaire de contact"
+msgstr "New message via the contact form"
+
+#: home/views.py:25
+msgid "Votre message a été envoyé avec succès."
+msgstr "Your message has been sent successfully."
+
+#: home/views.py:28
+msgid "Veuillez remplir tous les champs."
+msgstr "Please fill in all the fields."
+
+#: market/templates/emails/purchase_notification.txt:2
+#, python-format
+msgid ""
+"\n"
+"Bonjour %(seller)s,\n"
+"\n"
+"L'utilisateur %(buyer)s souhaite acheter votre objet :\n"
+msgstr ""
+"\n"
+"Hello %(seller)s,\n"
+"\n"
+"User %(buyer)s wants to buy your item:\n"
+
+#: market/templates/emails/purchase_notification.txt:9
+msgid "Pour"
+msgstr "For"
+
+#: market/templates/emails/purchase_notification.txt:9
+#: market/templates/market/_offers_table.html:35
+#: market/templates/market/_offers_table.html:66
+msgid "pièces"
+msgstr "coins"
+
+#: market/templates/emails/purchase_notification.txt:11
+msgid "Message de l'acheteur"
+msgstr "Message from the buyer"
+
+#: market/templates/emails/purchase_notification.txt:14
+msgid "Coordonnées de l'acheteur"
+msgstr "Buyer contact details"
+
+#: market/templates/emails/purchase_notification.txt:15
+#: market/templates/market/_offers_table.html:86
+msgid "Email"
+msgstr "Email"
+
+#: market/templates/emails/purchase_notification.txt:22
+msgid ""
+"Veuillez le contacter en jeu ou via les moyens ci-dessus pour finaliser "
+"l'échange."
+msgstr ""
+"Please contact them in-game or using the details above to complete the trade."
+
+#: market/templates/market/_offers_table.html:5
+msgid "Image"
+msgstr "Image"
+
+#: market/templates/market/_offers_table.html:6
+msgid "Nom"
+msgstr "Name"
+
+#: market/templates/market/_offers_table.html:7
+#: market/templates/market/create_offer.html:81
+msgid "Quantité"
+msgstr "Quantity"
+
+#: market/templates/market/_offers_table.html:8
+msgid "Prix"
+msgstr "Price"
+
+#: market/templates/market/_offers_table.html:11
+#: market/templates/market/_offers_table.html:15
+msgid "Vendeur"
+msgstr "Seller"
+
+#: market/templates/market/_offers_table.html:13
+msgid "Acheteur"
+msgstr "Buyer"
+
+#: market/templates/market/_offers_table.html:28
+msgid "Pas d'image"
+msgstr "No image"
+
+#: market/templates/market/_offers_table.html:66
+msgid "pour"
+msgstr "for"
+
+#: market/templates/market/_offers_table.html:67
+#: market/templates/market/offer_list.html:122
+msgid "Acheter"
+msgstr "Buyer"
+
+#: market/templates/market/_offers_table.html:73
+msgid "Aucune offre à afficher."
+msgstr "No offer to display."
+
+#: market/templates/market/_offers_table.html:82
+#: market/templates/market/user_detail.html:4
+msgid "Informations du joueur"
+msgstr "Player information"
+
+#: market/templates/market/_offers_table.html:83
+#: market/templates/market/offer_list.html:56
+msgid "Fermer"
+msgstr "Close"
+
+#: market/templates/market/_offers_table.html:87
+#: market/templates/market/user_detail.html:8
+msgid "Ubisoft"
+msgstr "Ubisoft"
+
+#: market/templates/market/_offers_table.html:88
+#: market/templates/market/user_detail.html:13
+msgid "Discord"
+msgstr "Discord"
+
+#: market/templates/market/_offers_table.html:89
+#: market/templates/market/user_detail.html:18
+msgid "PSN"
+msgstr "PSN"
+
+#: market/templates/market/_offers_table.html:90
+#: market/templates/market/user_detail.html:23
+msgid "Xbox"
+msgstr "Xbox"
+
+#: market/templates/market/_offers_table.html:91
+#: market/templates/market/user_detail.html:28
+msgid "Steam"
+msgstr "Steam"
+
+#: market/templates/market/create_offer.html:8
+#: market/templates/market/create_offer.html:65
+msgid "Créer une offre de vente"
+msgstr "Create a sales offer"
+
+#: market/templates/market/create_offer.html:72
+msgid "Objet à vendre"
+msgstr "Item to sell"
+
+#: market/templates/market/create_offer.html:73
+msgid "Choisir un objet"
+msgstr "Choose an item"
+
+#: market/templates/market/create_offer.html:86
+msgid "Type de paiement"
+msgstr "Payment type"
+
+#: market/templates/market/create_offer.html:91
+msgid "Prix en argent"
+msgstr "Price in coins"
+
+#: market/templates/market/create_offer.html:96
+#: market/templates/market/create_offer.html:97
+msgid "Objet demandé"
+msgstr "Requested item"
+
+#: market/templates/market/create_offer.html:103
+msgid "Quantité demandée"
+msgstr "Requested quantity"
+
+#: market/templates/market/create_offer.html:108
+msgid "Publier l'offre"
+msgstr "Publish offer"
+
+#: market/templates/market/offer_list.html:7
+msgid "Hôtel des ventes"
+msgstr "Marketplace"
+
+#: market/templates/market/offer_list.html:45
+msgid "Modifier mes infos"
+msgstr "Edit my infos"
+
+#: market/templates/market/offer_list.html:46
+msgid "Déconnexion"
+msgstr "Logout"
+
+#: market/templates/market/offer_list.html:62
+msgid "Hôtel des ventes Skull & Bones"
+msgstr "Skull & Bones Marketplace"
+
+#: market/templates/market/offer_list.html:66
+msgid "Toutes les ventes"
+msgstr "All sales"
+
+#: market/templates/market/offer_list.html:67
+msgid "Mes ventes"
+msgstr "My sales"
+
+#: market/templates/market/offer_list.html:68
+msgid "Mes achats"
+msgstr "My purchases"
+
+#: market/templates/market/offer_list.html:75
+msgid "Filtrer par catégorie"
+msgstr "Filter by category"
+
+#: market/templates/market/offer_list.html:82
+msgid "Rechercher un item..."
+msgstr "Search for an item..."
+
+#: market/templates/market/offer_list.html:85
+msgid "Créer une vente"
+msgstr "Create a sale offer"
+
+#: market/templates/market/offer_list.html:101
+msgid "Confirmer l'achat"
+msgstr "Confirm purchase"
+
+#: market/templates/market/offer_list.html:109
+msgid ""
+"J’accepte que mes coordonnées (email, pseudo Ubisoft, Discord) soient "
+"transmises au vendeur."
+msgstr ""
+"I agree that my contact details (email, Ubisoft nickname, Discord) will be "
+"shared with the seller."
+
+#: market/templates/market/offer_list.html:113
+msgid "Message pour le vendeur (facultatif)"
+msgstr "Message to the seller (optional)"
+
+#: market/templates/market/offer_list.html:119
+msgid "Annuler"
+msgstr "Cancel"
+
+#: market/views.py:88
+msgid "Vous devez accepter le partage de vos coordonnées."
+msgstr "You must agree to the sharing of your contact details."
+
+#: market/views.py:94
+msgid "Cette offre n'existe pas."
+msgstr "This offer does not exist."
+
+#: market/views.py:109
+#, python-brace-format
+msgid ""
+"[Skull Market] {request.user.ubisoft_username} souhaite acheter votre objet"
+msgstr "[Skull Market] {request.user.ubisoft_username} wants to buy your item"
+
+#: market/views.py:128
+msgid "Votre intention d'achat a été envoyée au vendeur par email."
+msgstr "Your intention to buy has been sent to the seller by email."
+
+#: templates/contact.html:6 templates/contact.html:11
+#: templates/includes/contact_footer.html:6
+msgid "Contactez-nous"
+msgstr "Contact us"
+
+#: templates/contact.html:22
+msgid "Raison du contact"
+msgstr "Reason for contact"
+
+#: templates/contact.html:24
+msgid "Bug sur le site"
+msgstr "Website bug"
+
+#: templates/contact.html:25
+msgid "Il manque un élément"
+msgstr "One element missing"
+
+#: templates/contact.html:26
+msgid "Autre"
+msgstr "Other"
+
+#: templates/contact.html:31
+msgid "Message"
+msgstr "Message"
+
+#: templates/contact.html:36
+msgid "Envoyer"
+msgstr "Send"
