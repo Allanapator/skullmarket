@@ -70,11 +70,6 @@
               {% for error in field.errors %}
               <div class="text-danger small">{{ error }}</div>
               {% endfor %}
-
-              <div class="mb-3">
-                {{ form.captcha }}
-                {% for error in form.captcha.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
-              </div>
             </div>
             {% endfor %}
 
